@@ -3,11 +3,11 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class EnsureEmailIsVerified
+class Guest
 {
     /**
      * Handle an incoming request.
@@ -16,12 +16,9 @@ class EnsureEmailIsVerified
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!$request->user() ||
-            ($request->user() instanceof MustVerifyEmail &&
-                !$request->user()->hasVerifiedEmail())) {
-            return redirect()->route('verification.notice');
+        if (Auth::check()) {
+            return redirect()->route('users.index');
         }
-
         return $next($request);
     }
 }

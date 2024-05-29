@@ -26,7 +26,7 @@
     <link href="{{ asset('assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
 
     <!-- Template Main CSS File -->
-    <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/welcome/style.css') }}" rel="stylesheet">
 
 </head>
 <body>
@@ -38,8 +38,8 @@
                                    data-typed-items=" управлять деньгами, анализировать расходы, умножать доходы"></span>
             </h2>
             <div class="actions">
-                <a href="#about" class="btn-get-started">Авторизация</a>
-                <a href="#services" class="btn-get-started">Регистрация</a>
+                <a href="{{ route('auth.index') }}" class="btn-get-started">Авторизация</a>
+                <a href="{{ route('auth.create') }}" class="btn-get-started">Регистрация</a>
             </div>
         </div>
     </div>
@@ -51,6 +51,6 @@
 <script src="{{ asset('assets/vendor/isotope-layout/isotope.pkgd.min.js') }}"></script>
 <script src="{{ asset('assets/vendor/swiper/swiper-bundle.min.js') }}"></script>
 <script src="{{ asset('assets/vendor/typed.js/typed.umd.js') }}"></script>
-<script src="{{ asset('assets/js/main.js') }}"></script>
+<script src="{{ asset('assets/js/welcome/main.js') }}"></script>
 </body>
 </html>
