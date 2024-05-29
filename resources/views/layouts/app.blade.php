@@ -14,14 +14,14 @@
             <h2>Money Manager</h2>
         </div>
         <ul class="sidebar-nav">
-            <li class="active">
-                <a href="#"><i class="fa fa-home"></i>Home</a>
+            <li>
+                <a href="{{ route('users.index') }}"><i class="fa fa-home"></i>Домой</a>
             </li>
             <li>
-                <a href="#"><i class="fa fa-plug"></i>Plugins</a>
+                <a href="#"><i class="fa fa-newspaper"></i>Новости</a>
             </li>
             <li>
-                <a href="#"><i class="fa fa-user"></i>Users</a>
+                <a href="{{ route('users.edit', auth()->user()->id) }}"><i class="fa fa-gear"></i>Настройки</a>
             </li>
         </ul>
     </aside>
