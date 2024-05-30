@@ -2,12 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\DTO\User\UpdateDTO;
+use App\Http\Requests\User\UpdateRequest;
 use App\Models\User;
+use App\Services\UserService;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
 
+    private UserService $userService;
+
+    public function __construct(UserService $userService)
+    {
+        $this->userService = $userService;
+    }
 
     /**
      * Display a listing of the resource.
@@ -39,9 +48,13 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
+    public function update(UpdateRequest $request, User $user)
     {
-        //
+        $validatedData = $request->validated();
+        $DTO = UpdateDTO::from($validatedData);
+
+        $this->userService->updateUser($DTO, $user);
+        return back()->with(['status' => 'Данные успешно обновлены']);
     }
 
     /**

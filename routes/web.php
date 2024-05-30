@@ -1,11 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\VerifyEmailController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\ResetPasswordController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\VerifyEmailController;
+use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->group(function () {
     Route::prefix('email')->group(function () {
@@ -34,8 +33,16 @@ Route::middleware('guest')->group(function () {
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::prefix('users')->group(function () {
         Route::get('/dashboard', [UserController::class, 'index'])->name('users.index');
-        Route::get('/settings/{user}', [UserController::class, 'edit'])->name('users.edit');
+
     });
 });
+
+Route::middleware(['auth'])->group(function () {
+    Route::prefix('users')->group(function () {
+        Route::get('/settings/{user}', [UserController::class, 'edit'])->name('users.edit');
+        Route::patch('/update/{user}', [UserController::class, 'update'])->name('users.update');
+    });
+});
+
 
 require __DIR__ . '/auth.php';
