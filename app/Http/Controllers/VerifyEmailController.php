@@ -6,6 +6,7 @@ use App\Services\VerifyEmailService;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class VerifyEmailController extends Controller
 {
@@ -25,7 +26,7 @@ class VerifyEmailController extends Controller
     public function create(EmailVerificationRequest $request): RedirectResponse
     {
         $this->verifyEmailService->verifyEmail($request);
-        return redirect()->intended('/users/dashboard');
+        return redirect()->intended('/users/dashboard/' . Auth::id());
     }
 
     public function store(Request $request): RedirectResponse

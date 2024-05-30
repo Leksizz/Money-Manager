@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\DTO\User\UpdateDTO;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class UserService
 {
@@ -28,5 +29,11 @@ class UserService
             return false;
         }
         return true;
+    }
+
+    public function deleteUser(User $user): void
+    {
+        $user->delete();
+        Auth::logout();
     }
 }

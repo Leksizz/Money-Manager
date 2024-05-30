@@ -31,11 +31,12 @@
             <p class="text-danger">{{ $message }}</p>
             @enderror
             <button type="submit" class="btn btn-warning mb-3">Сохранить изменения</button>
-            <div class="mb-3">
-                <a href="" class="text-warning text-decoration-none">Сменить пароль</a>
-            </div>
-            <div class="mb-3">
-                <a href="" class="text-danger text-decoration-none">Удалить аккаунт</a>
+        </form>
+        <form action="{{ route('users.destroy', auth()->user()->id) }}" method="post">
+            @csrf
+            @method('delete')
+            <div class="">
+                <button type="submit" class="btn btn-danger">Удалить аккаунт</button>
             </div>
         </form>
     </div>

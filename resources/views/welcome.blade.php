@@ -38,7 +38,7 @@
                                    data-typed-items=" управлять деньгами, анализировать расходы, умножать доходы"></span>
             </h2>
             <div class="actions">
-                <a href="{{ route('auth.index') }}" class="btn-get-started">Авторизация</a>
+                <a href="{{ route('login') }}" class="btn-get-started">Авторизация</a>
                 <a href="{{ route('auth.create') }}" class="btn-get-started">Регистрация</a>
             </div>
         </div>

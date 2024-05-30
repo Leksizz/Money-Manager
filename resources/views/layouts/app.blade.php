@@ -15,7 +15,7 @@
         </div>
         <ul class="sidebar-nav">
             <li>
-                <a href="{{ route('users.index') }}"><i class="fa fa-home"></i>Домой</a>
+                <a href="{{ route('users.index', auth()->user()->id) }}"><i class="fa fa-home"></i>Домой</a>
             </li>
             <li>
                 <a href="#"><i class="fa fa-newspaper"></i>Новости</a>

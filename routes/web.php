@@ -32,7 +32,7 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::prefix('users')->group(function () {
-        Route::get('/dashboard', [UserController::class, 'index'])->name('users.index');
+        Route::get('/dashboard/{user}', [UserController::class, 'index'])->name('users.index');
 
     });
 });
@@ -41,6 +41,7 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('users')->group(function () {
         Route::get('/settings/{user}', [UserController::class, 'edit'])->name('users.edit');
         Route::patch('/update/{user}', [UserController::class, 'update'])->name('users.update');
+        Route::delete('/delete/{user}', [UserController::class, 'destroy'])->name('users.destroy');
     });
 });
 

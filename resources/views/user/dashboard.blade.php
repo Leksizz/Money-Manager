@@ -1,4 +1,4 @@
 @extends('layouts.app')
 @section('content')
-    <p>123</p>
+    <h3 class="text-center mt-3">Ваш баланс: {{ $user->balance->amount }}</h3>
 @endsection

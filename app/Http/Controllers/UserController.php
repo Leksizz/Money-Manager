@@ -6,7 +6,11 @@ use App\DTO\User\UpdateDTO;
 use App\Http\Requests\User\UpdateRequest;
 use App\Models\User;
 use App\Services\UserService;
+
+//use Faker\Core\Number;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Number;
 
 class UserController extends Controller
 {
@@ -21,9 +25,9 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(User $user)
     {
-        return view('user.dashboard');
+        return view('user.dashboard', compact('user'));
     }
 
     /**
@@ -60,9 +64,11 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $user)
+    public function destroy(User $user): RedirectResponse
     {
-        //
+        $this->userService->deleteUser($user);
+
+        return redirect('/');
     }
 }
 

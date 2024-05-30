@@ -9,6 +9,7 @@ use App\Http\Requests\Auth\RegisterRequest;
 use App\Services\AuthService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -58,7 +59,7 @@ class AuthController extends Controller
         $DTO = LoginDTO::from($validatedData);
 
         if (AuthService::attempt($DTO, $request)) {
-            return redirect()->intended('/users/dashboard');
+            return redirect()->intended('/users/dashboard/' . Auth::id());
         }
 
         AuthService::regenerateSession($request);
