@@ -1,10 +1,14 @@
 <?php
 
 use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controllers\IncomeController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PasswordConfirmController;
+use App\Http\Controllers\BalanceController;
+use App\Http\Controllers\ExpenseController;
 
 Route::middleware('auth')->group(function () {
     Route::prefix('email')->group(function () {
@@ -31,13 +35,12 @@ Route::middleware('guest')->group(function () {
 
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::prefix('users')->group(function () {
-        Route::get('/dashboard/{user}', [UserController::class, 'index'])->name('users.index');
-
+    Route::prefix('balance')->group(function () {
+        Route::get('/{balance}', [BalanceController::class, 'show'])->name('balance.show');
     });
 });
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'password.confirm'])->group(function () {
     Route::prefix('users')->group(function () {
         Route::get('/settings/{user}', [UserController::class, 'edit'])->name('users.edit');
         Route::patch('/update/{user}', [UserController::class, 'update'])->name('users.update');
@@ -45,5 +48,22 @@ Route::middleware(['auth'])->group(function () {
     });
 });
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/confirm-password', [PasswordConfirmController::class, 'show'])->name('password.confirm');
+    Route::post('/confirm-password', [PasswordConfirmController::class, 'store']);
+});
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::prefix('balance')->group(function () {
+        Route::get('/income/{balance}', [IncomeController::class, 'show'])->name('income.show');
+        Route::get('/expense/{balance}', [ExpenseController::class, 'show'])->name('expense.show');
+    });
+});
+
+Route::middleware(['auth', 'verified'])->group(function () {
+   Route::prefix('balance/income/{balance}')->group(function () {
+       Route::get('/today', [IncomeController::class, 'today'])->name('income.today');
+   });
+});
 
 require __DIR__ . '/auth.php';

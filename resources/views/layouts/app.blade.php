@@ -15,7 +15,13 @@
         </div>
         <ul class="sidebar-nav">
             <li>
-                <a href="{{ route('users.index', auth()->user()->id) }}"><i class="fa fa-home"></i>Домой</a>
+                <a href="{{ route('balance.show', auth()->user()->id) }}"><i class="fa fa-home"></i>Домой</a>
+            </li>
+            <li>
+                <a href="{{ route('income.show', auth()->user()->id) }}"><i class="fa fa-coins"></i>Доходы</a>
+            </li>
+            <li>
+                <a href="{{ route('expense.show', auth()->user()->id) }}"><i class="fa fa-store"></i>Расходы</a>
             </li>
             <li>
                 <a href="#"><i class="fa fa-newspaper"></i>Новости</a>

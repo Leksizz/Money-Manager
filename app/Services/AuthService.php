@@ -34,7 +34,7 @@ class AuthService
 
     private function registerBalance(User $user): void
     {
-        Balance::create([
+        $user->balance()->create([
             'user_id' => $user->id,
             'amount' => 0,
         ]);

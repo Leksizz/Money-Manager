@@ -26,7 +26,7 @@ class VerifyEmailController extends Controller
     public function create(EmailVerificationRequest $request): RedirectResponse
     {
         $this->verifyEmailService->verifyEmail($request);
-        return redirect()->intended('/users/dashboard/' . Auth::id());
+        return redirect()->intended('/balance/' . Auth::id());
     }
 
     public function store(Request $request): RedirectResponse

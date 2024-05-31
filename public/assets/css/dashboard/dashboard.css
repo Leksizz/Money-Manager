@@ -1,0 +1,70 @@
+.pie-chart {
+    background:
+        radial-gradient(
+            circle closest-side,
+            white 0,
+            white 37.05%,
+            transparent 37.05%,
+            transparent 65%,
+            white 0
+        ),
+        conic-gradient(
+            from 197deg,
+            #4e79a7 0,
+            #4e79a7 38%,
+            #f28e2c 0,
+            #f28e2c 61%,
+            #e15759 0,
+            #e15759 77%,
+            #76b7b2 0,
+            #76b7b2 87%,
+            #59a14f 0,
+            #59a14f 93%,
+            #edc949 0,
+            #edc949 100%
+        );
+    position: relative;
+    width: 500px;
+    min-height: 350px;
+    margin: 0;
+    outline: 1px solid #ccc;
+}
+.pie-chart h4 {
+    position: absolute;
+    margin: 1rem;
+}
+.pie-chart cite {
+    position: absolute;
+    bottom: 0;
+    font-size: 80%;
+    padding: 1rem;
+    color: gray;
+}
+.pie-chart figcaption {
+    position: absolute;
+    bottom: 1em;
+    right: 1em;
+    font-size: smaller;
+    text-align: right;
+}
+.pie-chart span:after {
+    display: inline-block;
+    content: "";
+    width: 0.8em;
+    height: 0.8em;
+    margin-left: 0.4em;
+    height: 0.8em;
+    border-radius: 0.2em;
+    background: currentColor;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.dropdown-item.active, .dropdown-item:active {
+    background-color: #fa0;
+}

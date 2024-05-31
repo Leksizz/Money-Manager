@@ -24,9 +24,10 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'sometimes|string|max:255',
-            'lastname' => 'sometimes|string|max:255',
-            'email' => 'required|email|unique:users,email,'.$this->user()->id
+            'name' => 'string|max:255',
+            'lastname' => 'string|max:255',
+            'email' => 'required|email|unique:users,email,' . $this->user()->id,
+            'currency_id' => 'int',
         ];
     }
 }

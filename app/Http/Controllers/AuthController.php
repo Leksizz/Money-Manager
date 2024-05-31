@@ -59,7 +59,7 @@ class AuthController extends Controller
         $DTO = LoginDTO::from($validatedData);
 
         if (AuthService::attempt($DTO, $request)) {
-            return redirect()->intended('/users/dashboard/' . Auth::id());
+            return redirect()->intended('/balance/' . Auth::id());
         }
 
         AuthService::regenerateSession($request);

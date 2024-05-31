@@ -16,7 +16,6 @@ return new class extends Migration {
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('balance_id');
             $table->timestamps();
-
             $table->foreign('category_id')->references('id')->on('income_categories')->onDelete('cascade');
             $table->foreign('balance_id')->references('id')->on('balances')->onDelete('cascade');
         });

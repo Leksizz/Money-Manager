@@ -20,19 +20,24 @@ class Balance extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function income(): HasMany
+    public function incomes(): HasMany
     {
         return $this->hasMany(Income::class);
     }
 
-    public function expense(): HasMany
+    public function expenses(): HasMany
     {
         return $this->hasMany(Expense::class);
     }
 
     public function totalAmount(): mixed
     {
-        return $this->income()->sum('amount') - $this->expense()->sum('amount');
+        return $this->incomes()->sum('amount') - $this->expenses()->sum('amount');
+    }
+
+    public function currency(): BelongsTo
+    {
+        return $this->belongsTo(Currency::class);
     }
 
     use HasFactory;

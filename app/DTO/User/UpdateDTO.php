@@ -11,4 +11,6 @@ class UpdateDTO extends Data
     public string $lastname;
 
     public string $email;
+
+    public int $currency_id;
 }
