@@ -19,7 +19,7 @@
                                 <li><a class="dropdown-item" href="#">Месяц</a></li>
                                 <li><a class="dropdown-item" href="#">Год</a></li>
                                 <li><a class="dropdown-item" href="#">Всё время</a></li>
-                                <li><a class="dropdown-item" href="{{ route('balance.period') }}">Выбрать период:</a></li>
+{{--                                <li><a class="dropdown-item" href="{{ route('balance.period', auth()->id()) }}">Выбрать период:</a></li>--}}
                             </ul>
                         </li>
                     </ul>

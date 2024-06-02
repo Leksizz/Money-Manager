@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\DTO\Date\DateDTO;
+use App\Http\Requests\Date\DateRequest;
 use App\Http\Resources\IncomeResource;
 use App\Models\Balance;
-use App\Models\Income;
 use App\Services\Api\BalanceService;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class IncomeController
@@ -55,8 +55,13 @@ class IncomeController
         return IncomeResource::collection($incomes);
     }
 
-    public function period(): AnonymousResourceCollection
+    public function period(Balance $balance, DateRequest $request): AnonymousResourceCollection
     {
-        dd(13);
+        $validatedData = $request->validated();
+        $DTO = DateDTO::from($validatedData);
+
+        $incomes = $this->balanceService->period($balance->incomes(), $DTO);
+
+        return IncomeResource::collection($incomes);
     }
 }

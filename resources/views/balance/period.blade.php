@@ -11,12 +11,18 @@
                             @csrf
                             <div class="mb-3">
                                 <label for="from" class="form-label">С:</label>
-                                <input type="date" class="form-control" id="from" required>
+                                <input name="start" type="date" class="form-control" id="from" required>
                             </div>
+                            @error('start')
+                            <p class="text-danger">{{ $message }}</p>
+                            @enderror
                             <div class="mb-3">
                                 <label for="to" class="form-label">По:</label>
-                                <input type="date" class="form-control" id="to" required>
+                                <input name="end" type="date" class="form-control" id="to" required>
                             </div>
+                            @error('end')
+                            <p class="text-danger">{{ $message }}</p>
+                            @enderror
                             <button type="submit" class="btn btn-warning">Отправить</button>
                         </form>
                     </div>
