@@ -18,9 +18,4 @@ class BalanceService
     {
         return $balance->currency->code;
     }
-
-    public function todayIncomes(Balance $balance): Collection
-    {
-        return $balance->incomes()->whereDate('created_at', Carbon::today())->with('balance')->get();
-    }
 }

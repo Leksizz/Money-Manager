@@ -17,7 +17,7 @@ class Guest
     public function handle(Request $request, Closure $next): Response
     {
         if (Auth::check()) {
-            return redirect()->route('users.index');
+            return redirect()->route('balance.show', auth()->id());
         }
         return $next($request);
     }

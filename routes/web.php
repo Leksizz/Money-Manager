@@ -36,6 +36,7 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::prefix('balance')->group(function () {
+        Route::get('/period/{type}/{balance}', [BalanceController::class, 'period'])->name('balance.period');
         Route::get('/{balance}', [BalanceController::class, 'show'])->name('balance.show');
     });
 });
@@ -54,16 +55,11 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::prefix('balance')->group(function () {
-        Route::get('/income/{balance}', [IncomeController::class, 'show'])->name('income.show');
+    Route::prefix('income')->group(function () {
+        Route::get('/today/{balance}', [IncomeController::class, 'show'])->name('income.show');
         Route::get('/expense/{balance}', [ExpenseController::class, 'show'])->name('expense.show');
     });
 });
 
-Route::middleware(['auth', 'verified'])->group(function () {
-   Route::prefix('balance/income/{balance}')->group(function () {
-       Route::get('/today', [IncomeController::class, 'today'])->name('income.today');
-   });
-});
 
 require __DIR__ . '/auth.php';

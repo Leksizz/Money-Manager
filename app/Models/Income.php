@@ -19,5 +19,10 @@ class Income extends Model
         return $this->belongsTo(Balance::class);
     }
 
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(IncomeCategory::class);
+    }
+
     use HasFactory;
 }
