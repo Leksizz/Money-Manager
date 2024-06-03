@@ -20,12 +20,12 @@ class Balance extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function incomes(): HasMany
+    public function income(): HasMany
     {
         return $this->hasMany(Income::class);
     }
 
-    public function expenses(): HasMany
+    public function expense(): HasMany
     {
         return $this->hasMany(Expense::class);
     }

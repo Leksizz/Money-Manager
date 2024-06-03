@@ -1,19 +1,17 @@
 <?php
 
-use App\Http\Controllers\Api\UserController;
-use App\Http\Controllers\Api\IncomeController;
+use App\Http\Controllers\Api\FinanceController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ExpenseController;
 
 // Route::apiResource('users', UserController::class);
 
-Route::prefix('income')->group(function () {
-    Route::get('/today/{balance}', [IncomeController::class, 'today'])->name('income.today');
-    Route::get('/week/{balance}', [IncomeController::class, 'week'])->name('income.week');
-    Route::get('/month/{balance}', [IncomeController::class, 'month'])->name('income.month');
-    Route::get('/year/{balance}', [IncomeController::class, 'year'])->name('income.year');
-    Route::get('/all/{balance}', [IncomeController::class, 'all'])->name('income.all');
-    Route::post('/period/{balance}', [IncomeController::class, 'period'])->name('income.period');
+Route::prefix('{type}')->group(function () {
+    Route::get('/today/{balance}', [FinanceController::class, 'today'])->name('finance.today');
+    Route::get('/week/{balance}', [FinanceController::class, 'week'])->name('finance.week');
+    Route::get('/month/{balance}', [FinanceController::class, 'month'])->name('finance.month');
+    Route::get('/year/{balance}', [FinanceController::class, 'year'])->name('finance.year');
+    Route::get('/all/{balance}', [FinanceController::class, 'all'])->name('finance.all');
+    Route::post('/period/{balance}', [FinanceController::class, 'period'])->name('finance.period');
 });
 
 
