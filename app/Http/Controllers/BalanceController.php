@@ -25,6 +25,6 @@ class BalanceController extends Controller
 
     public function period(string $type, Balance $balance): View
     {
-        return view('balance.period', compact( 'type','balance'));
+        return view('balance.period', compact('type', 'balance'));
     }
 }

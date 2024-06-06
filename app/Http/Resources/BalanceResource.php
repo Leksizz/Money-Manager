@@ -16,6 +16,8 @@ class BalanceResource extends JsonResource
     {
         return [
             'amount' => $this->amount,
+            'income' => IncomeResource::collection($this->income),
+            'expense' => ExpenseResource::collection($this->expense),
         ];
     }
 }

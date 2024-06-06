@@ -4,11 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Balance;
 use App\Services\BalanceService;
-use Illuminate\Http\Request;
+use Illuminate\View\View;
 
-class ExpenseController extends Controller
+class FinanceController extends Controller
 {
-
     private BalanceService $balanceService;
 
     public function __construct(BalanceService $balanceService)
@@ -16,10 +15,11 @@ class ExpenseController extends Controller
         $this->balanceService = $balanceService;
     }
 
-    public function show(Balance $balance)
+    public function show(string $type, Balance $balance): View
     {
         $balance = $this->balanceService->amount($balance);
 
-        return view('balance.expense', compact('balance'));
+        return view("balance.$type", compact('type', 'balance'));
     }
 }
+

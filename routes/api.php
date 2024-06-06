@@ -14,5 +14,7 @@ Route::prefix('{type}')->group(function () {
     Route::post('/period/{balance}', [FinanceController::class, 'period'])->name('finance.period');
 });
 
+Route::get('/statistic/{balance}', [FinanceController::class, 'statistic'])->name('finance.statistic');
+
 
 

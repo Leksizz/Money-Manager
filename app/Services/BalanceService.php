@@ -3,8 +3,6 @@
 namespace App\Services;
 
 use App\Models\Balance;
-use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Number;
 
 class BalanceService

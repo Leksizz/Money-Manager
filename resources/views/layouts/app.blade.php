@@ -15,19 +15,19 @@
         </div>
         <ul class="sidebar-nav">
             <li>
-                <a href="{{ route('balance.show', auth()->user()->id) }}"><i class="fa fa-home"></i>Домой</a>
+                <a href="{{ route('balance.show', auth()->id()) }}"><i class="fa fa-home"></i>Домой</a>
             </li>
             <li>
-                <a href="{{ route('income.show', auth()->user()->id) }}"><i class="fa fa-coins"></i>Доходы</a>
+                <a href="{{ route('finance.show', ['type' => 'income', 'balance' => auth()->id()]) }}"><i class="fa fa-coins"></i>Доходы</a>
             </li>
             <li>
-                <a href="{{ route('expense.show', auth()->user()->id) }}"><i class="fa fa-store"></i>Расходы</a>
+                <a href="{{ route('finance.show', ['type' => 'expense', 'balance' => auth()->id()]) }}"><i class="fa fa-store"></i>Расходы</a>
             </li>
             <li>
                 <a href="#"><i class="fa fa-newspaper"></i>Новости</a>
             </li>
             <li>
-                <a href="{{ route('users.edit', auth()->user()->id) }}"><i class="fa fa-gear"></i>Настройки</a>
+                <a href="{{ route('users.edit', auth()->id()) }}"><i class="fa fa-gear"></i>Настройки</a>
             </li>
         </ul>
     </aside>

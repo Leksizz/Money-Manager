@@ -20,7 +20,7 @@ class Expense extends Model
 
     public function category(): BelongsTo
     {
-        return $this->belongsTo(IncomeCategory::class);
+        return $this->belongsTo(ExpenseCategory::class);
     }
 
     use HasFactory;

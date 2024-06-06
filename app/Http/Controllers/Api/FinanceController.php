@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Api;
 
 use App\DTO\Date\DateDTO;
 use App\Http\Requests\Date\DateRequest;
+use App\Http\Resources\BalanceResource;
 use App\Http\Resources\ExpenseResource;
 use App\Http\Resources\IncomeResource;
 use App\Models\Balance;
 use App\Services\Api\BalanceService;
+use http\Env\Response;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
@@ -65,6 +67,11 @@ class FinanceController
         $finance = $this->balanceService->period($balance->$type(), $DTO);
 
         return $this->collection($type, $finance);
+    }
+
+    public function statistic(Balance $balance): BalanceResource
+    {
+        return new BalanceResource($balance);
     }
 
     private function collection(string $type, Collection $finance): AnonymousResourceCollection

@@ -32,7 +32,7 @@ class Balance extends Model
 
     public function totalAmount(): mixed
     {
-        return $this->incomes()->sum('amount') - $this->expenses()->sum('amount');
+        return $this->income()->sum('amount') - $this->expense()->sum('amount');
     }
 
     public function currency(): BelongsTo

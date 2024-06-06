@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\ForgotPasswordController;
-use App\Http\Controllers\IncomeController;
+use App\Http\Controllers\FinanceController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VerifyEmailController;
@@ -36,10 +36,11 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::prefix('balance')->group(function () {
-        Route::get('/period/{type}/{balance}', [BalanceController::class, 'period'])->name('balance.period');
         Route::get('/{balance}', [BalanceController::class, 'show'])->name('balance.show');
     });
 });
+
+Route::get('/{type}/period/{balance}', [BalanceController::class, 'period'])->name('balance.period');
 
 Route::middleware(['auth', 'password.confirm'])->group(function () {
     Route::prefix('users')->group(function () {
@@ -55,9 +56,8 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::prefix('income')->group(function () {
-        Route::get('/today/{balance}', [IncomeController::class, 'show'])->name('income.show');
-        Route::get('/expense/{balance}', [ExpenseController::class, 'show'])->name('expense.show');
+    Route::prefix('{type}')->group(function () {
+        Route::get('/{balance}', [FinanceController::class, 'show'])->name('finance.show');
     });
 });
 
