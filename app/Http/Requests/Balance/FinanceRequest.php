@@ -11,7 +11,7 @@ class FinanceRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,7 @@ class FinanceRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'amount' => 'integer|required|max:9',
+            'amount' => 'integer|required|max:999999999',
             'category_id' => 'integer|required'
         ];
     }

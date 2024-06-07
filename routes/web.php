@@ -16,6 +16,7 @@ use App\Http\Middleware\EnsureEmailIsVerified;
 
 Route::middleware([Authenticate::class, EnsureEmailIsVerified::class, Owner::class])->group(function () {
     Route::prefix('/finance/{type}/')->group(function () {
+        Route::post('/add/{balance}', [FinanceController::class, 'store'])->name('finance.store');
         Route::get('/{balance}', [FinanceController::class, 'show'])->name('finance.show');
     });
 });

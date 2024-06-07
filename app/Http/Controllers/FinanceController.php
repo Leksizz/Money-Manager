@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\DTO\Balance\FinanceDTO;
+use App\Http\Requests\Balance\FinanceRequest;
 use App\Models\Balance;
 use App\Services\BalanceService;
 use Illuminate\View\View;
@@ -22,9 +24,13 @@ class FinanceController extends Controller
         return view("balance.$type", compact('type', 'balance'));
     }
 
-    public function store()
+    public function store(string $type, Balance $balance, FinanceRequest $request)
     {
+        $validatedData = $request->validated();
+        $DTO = FinanceDTO::from($validatedData);
 
+        $this->balanceService->addFinance($type, $balance, $DTO);
+        return back()->with(['status' => 'Данные успешно добавлены']);
     }
 
 }

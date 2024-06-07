@@ -11,6 +11,8 @@ class Expense extends Model
 
     protected $fillable = [
         'amount',
+        'category_id',
+        'balance_id',
     ];
 
     public function balance(): BelongsTo

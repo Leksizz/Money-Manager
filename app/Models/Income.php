@@ -11,6 +11,7 @@ class Income extends Model
 
     protected $fillable = [
         'amount',
+        'category_id',
         'balance_id',
     ];
 

@@ -42,15 +42,21 @@
     <canvas id="doughnut-chart" class="chart-canvas chart-container"></canvas>
     <div class=" mt-5">
         <h2>Добавить доходы</h2>
-        <form action="" method="POST">
+        @if(session('status'))
+            <p class="text-success">{{ session('status') }}</p>
+        @endif
+        <form action="{{ route('finance.store', ['type' => $type, 'balance' => auth()->id()]) }}" method="POST">
             @csrf
             <div class="mb-3">
                 <label for="numberInput" class="form-label">Введите число</label>
-                <input type="text" class="form-control" id="numberInput">
+                <input type="text" name="amount" class="form-control" id="numberInput" maxlength="9">
             </div>
+            @error('amount')
+            <p class="text-danger">{{ $message }}</p>
+            @enderror
             <div class="mb-3">
                 <label for="categorySelect" class="form-label">Выберите категорию</label>
-                <select class="form-select" id="categorySelect">
+                <select class="form-select" name="category_id" id="categorySelect">
                     <option value="1" selected disabled>Выберите...</option>
                     <option value="1">Зарплата</option>
                     <option value="2">Инвестиции</option>
