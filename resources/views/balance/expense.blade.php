@@ -42,7 +42,8 @@
     <canvas id="doughnut-chart" class="chart-canvas chart-container"></canvas>
     <div class=" mt-5">
         <h2>Добавить расходы</h2>
-        <form>
+        <form action="" method="POST">
+            @csrf
             <div class="mb-3">
                 <label for="numberInput" class="form-label">Введите число</label>
                 <input type="text" class="form-control" id="numberInput">
@@ -50,13 +51,13 @@
             <div class="mb-3">
                 <label for="categorySelect" class="form-label">Выберите категорию</label>
                 <select class="form-select" id="categorySelect">
-                    <option value="Зарплата" selected disabled>Выберите...</option>
-                    <option value="Зарплата">Продукты</option>
-                    <option value="Инвестиции">Транспорт</option>
-                    <option value="Лотерея">Здоровье</option>
-                    <option value="Подработка">Дом</option>
-                    <option value="Подарок">Учёба</option>
-                    <option value="Продажа">Бытовые товары</option>
+                    <option value="1" selected disabled>Выберите...</option>
+                    <option value="1">Продукты</option>
+                    <option value="2">Транспорт</option>
+                    <option value="3">Здоровье</option>
+                    <option value="4">Дом</option>
+                    <option value="5">Учёба</option>
+                    <option value="6">Бытовые товары</option>
                 </select>
             </div>
             <button type="submit" class="btn btn-warning">Отправить</button>

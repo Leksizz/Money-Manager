@@ -16,4 +16,14 @@ class BalanceService
     {
         return $balance->currency->code;
     }
+
+    public function addFinance()
+    {
+
+    }
+
+    private function updateBalance()
+    {
+
+    }
 }

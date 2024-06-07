@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Http\Requests\Date;
+namespace App\Http\Requests\Balance;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class DateRequest extends FormRequest
+class FinanceRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -22,8 +22,8 @@ class DateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'start' => 'date|required',
-            'end' => 'date|required',
+            'amount' => 'integer|required|max:9',
+            'category_id' => 'integer|required'
         ];
     }
 }

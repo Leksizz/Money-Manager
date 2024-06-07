@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\FinanceController;
 use App\Http\Controllers\ResetPasswordController;
@@ -8,9 +9,12 @@ use App\Http\Controllers\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PasswordConfirmController;
 use App\Http\Controllers\BalanceController;
-use App\Http\Controllers\ExpenseController;
+use App\Http\Middleware\Authenticate;
+use App\Http\Middleware\Guest;
+use App\Http\Middleware\Owner;
+use App\Http\Middleware\EnsureEmailIsVerified;
 
-Route::middleware('auth')->group(function () {
+Route::middleware(Authenticate::class)->group(function () {
     Route::prefix('email')->group(function () {
         Route::get('/verify', [VerifyEmailController::class, 'index'])
             ->name('verification.notice');
@@ -20,10 +24,10 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/email/verify/{id}/{hash}', [VerifyEmailController::class, 'create'])
-    ->middleware(['auth', 'signed'])
+    ->middleware([Authenticate::class, EnsureEmailIsVerified::class])
     ->name('verification.verify');
 
-Route::middleware('guest')->group(function () {
+Route::middleware(Guest::class)->group(function () {
     Route::get('/', function () {
         return view('welcome');
     });
@@ -34,7 +38,7 @@ Route::middleware('guest')->group(function () {
 });
 
 
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware([Authenticate::class, EnsureEmailIsVerified::class, Owner::class])->group(function () {
     Route::prefix('balance')->group(function () {
         Route::get('/{balance}', [BalanceController::class, 'show'])->name('balance.show');
     });
@@ -42,7 +46,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 Route::get('/{type}/period/{balance}', [BalanceController::class, 'period'])->name('balance.period');
 
-Route::middleware(['auth', 'password.confirm'])->group(function () {
+Route::middleware([Authenticate::class, 'password.confirm', Owner::class])->group(function () {
     Route::prefix('users')->group(function () {
         Route::get('/settings/{user}', [UserController::class, 'edit'])->name('users.edit');
         Route::patch('/update/{user}', [UserController::class, 'update'])->name('users.update');
@@ -50,16 +54,31 @@ Route::middleware(['auth', 'password.confirm'])->group(function () {
     });
 });
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(Authenticate::class)->group(function () {
     Route::get('/confirm-password', [PasswordConfirmController::class, 'show'])->name('password.confirm');
     Route::post('/confirm-password', [PasswordConfirmController::class, 'store']);
 });
 
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware([Authenticate::class, EnsureEmailIsVerified::class, Owner::class])->group(function () {
     Route::prefix('{type}')->group(function () {
         Route::get('/{balance}', [FinanceController::class, 'show'])->name('finance.show');
     });
 });
 
 
-require __DIR__ . '/auth.php';
+
+//Route::middleware(Guest::class)->group(function () {
+Route::prefix('auth')->group(function () {
+    Route::get('/register', [AuthController::class, 'create'])->name('auth.create');
+    Route::get('/login', [AuthController::class, 'index'])->name('login');
+    Route::post('/store', [AuthController::class, 'store'])->name('auth.store');
+    Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
+});
+//});
+
+Route::post('/auth/logout', [AuthController::class, 'destroy'])
+    ->middleware(Authenticate::class)
+    ->name('auth.destroy');
+
+
+//require __DIR__ . '/auth.php';

@@ -21,5 +21,11 @@ class FinanceController extends Controller
 
         return view("balance.$type", compact('type', 'balance'));
     }
+
+    public function store()
+    {
+
+    }
+
 }
 
