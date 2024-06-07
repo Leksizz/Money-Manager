@@ -14,6 +14,12 @@ use App\Http\Middleware\Guest;
 use App\Http\Middleware\Owner;
 use App\Http\Middleware\EnsureEmailIsVerified;
 
+Route::middleware([Authenticate::class, EnsureEmailIsVerified::class, Owner::class])->group(function () {
+    Route::prefix('/finance/{type}/')->group(function () {
+        Route::get('/{balance}', [FinanceController::class, 'show'])->name('finance.show');
+    });
+});
+
 Route::middleware(Authenticate::class)->group(function () {
     Route::prefix('email')->group(function () {
         Route::get('/verify', [VerifyEmailController::class, 'index'])
@@ -37,7 +43,6 @@ Route::middleware(Guest::class)->group(function () {
     Route::post('/password-reset', [ResetPasswordController::class, 'store'])->name('password.store');
 });
 
-
 Route::middleware([Authenticate::class, EnsureEmailIsVerified::class, Owner::class])->group(function () {
     Route::prefix('balance')->group(function () {
         Route::get('/{balance}', [BalanceController::class, 'show'])->name('balance.show');
@@ -59,26 +64,16 @@ Route::middleware(Authenticate::class)->group(function () {
     Route::post('/confirm-password', [PasswordConfirmController::class, 'store']);
 });
 
-Route::middleware([Authenticate::class, EnsureEmailIsVerified::class, Owner::class])->group(function () {
-    Route::prefix('{type}')->group(function () {
-        Route::get('/{balance}', [FinanceController::class, 'show'])->name('finance.show');
-    });
-});
-
-
-
-//Route::middleware(Guest::class)->group(function () {
+Route::middleware(Guest::class)->group(function () {
 Route::prefix('auth')->group(function () {
     Route::get('/register', [AuthController::class, 'create'])->name('auth.create');
     Route::get('/login', [AuthController::class, 'index'])->name('login');
     Route::post('/store', [AuthController::class, 'store'])->name('auth.store');
     Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
 });
-//});
+});
 
 Route::post('/auth/logout', [AuthController::class, 'destroy'])
     ->middleware(Authenticate::class)
     ->name('auth.destroy');
 
-
-//require __DIR__ . '/auth.php';

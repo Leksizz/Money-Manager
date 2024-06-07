@@ -19,9 +19,6 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->api(prepend: [
             EnsureFrontendRequestsAreStateful::class,
         ]);
-        $middleware->validateCsrfTokens(except: [
-            'auth/store'
-        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
     })->create();

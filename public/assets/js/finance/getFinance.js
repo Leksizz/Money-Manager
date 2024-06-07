@@ -1,7 +1,7 @@
 $(document).ready(function () {
     const url = (location.pathname.split('/'))
     $.ajax({
-        url: '/api/' + url[1] + '/today/' + url[2],
+        url: '/api/' + url[2] + '/today/' + url[3],
         method: 'GET',
         dataType: 'json',
     })
@@ -46,7 +46,7 @@ function matchValues(finance) {
         {name: 'Продажа', value: 0},
     ];
 
-    if (window.location.pathname.split('/')[1] === 'expense') {
+    if (window.location.pathname.split('/')[2] === 'expense') {
          values = [
             {name: 'Продукты', value: 0},
             {name: 'Транспорт', value: 0},

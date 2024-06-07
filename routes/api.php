@@ -2,10 +2,11 @@
 
 use App\Http\Controllers\Api\FinanceController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\Owner;
 
 // Route::apiResource('users', UserController::class);
 
-Route::middleware('owner')->group(function () {
+Route::middleware(Owner::class)->group(function () {
     Route::prefix('{type}')->group(function () {
         Route::get('/today/{balance}', [FinanceController::class, 'today'])->name('finance.today');
         Route::get('/week/{balance}', [FinanceController::class, 'week'])->name('finance.week');
@@ -17,7 +18,9 @@ Route::middleware('owner')->group(function () {
 });
 
 
-Route::get('/statistic/{balance}', [FinanceController::class, 'statistic'])->name('finance.statistic')->middleware('owner');
+Route::get('/statistic/{balance}', [FinanceController::class, 'statistic'])
+    ->name('finance.statistic')
+    ->middleware(Owner::class);
 
 
 

@@ -30,11 +30,6 @@ class Balance extends Model
         return $this->hasMany(Expense::class);
     }
 
-    public function totalAmount(): mixed
-    {
-        return $this->income()->sum('amount') - $this->expense()->sum('amount');
-    }
-
     public function currency(): BelongsTo
     {
         return $this->belongsTo(Currency::class);
