@@ -6,7 +6,9 @@ use App\DTO\User\UpdateDTO;
 use App\Http\Requests\User\UpdateRequest;
 use App\Models\User;
 use App\Services\UserService;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class UserController extends Controller
 {
@@ -18,12 +20,12 @@ class UserController extends Controller
         $this->userService = $userService;
     }
 
-    public function edit(User $user)
+    public function edit(User $user): View
     {
         return view('user.settings', compact('user'));
     }
 
-    public function update(UpdateRequest $request, User $user)
+    public function update(UpdateRequest $request, User $user): RedirectResponse
     {
         $validatedData = $request->validated();
         $DTO = UpdateDTO::from($validatedData);

@@ -24,9 +24,13 @@ class BalanceFactory extends Factory
 
     public function definition(): array
     {
-        return [
-            'amount' => random_int(0, 9999999),
-            'user_id' => User::factory(),
-        ];
+        foreach (User::all() as $index => $user) {
+            $seed =
+                [
+                    'amount' => random_int(0, 9999999),
+                    'user_id' => $index,
+                ];
+        }
+        return $seed;
     }
 }

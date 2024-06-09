@@ -20,6 +20,7 @@ class AuthService
             'lastname' => $DTO->lastname,
             'email' => $DTO->email,
             'password' => Hash::make($DTO->password),
+            'role_id' => 1,
         ]);
 
         $this->registerBalance($user);

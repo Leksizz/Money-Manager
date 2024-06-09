@@ -1,12 +1,10 @@
 <?php
 
-namespace App\Http\Requests\User;
+namespace App\Http\Requests\News;
 
-use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class UpdateRequest extends FormRequest
+class NewsRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,10 +22,11 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'string|max:255',
-            'lastname' => 'string|max:255',
-            'email' => 'email|unique:users,email,' . $this->user()->id,
-            'currency_id' => 'int',
+            'title' => ['required', 'string'],
+            'image' => ['required', 'file', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
+            'content' => ['required', 'string'],
+            'tag_ids' => ['nullable', 'array'],
+            'tag_ids.*' => ['required', 'integer', 'exists:tags,id'],
         ];
     }
 }

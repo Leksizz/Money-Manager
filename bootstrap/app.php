@@ -4,9 +4,6 @@ use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful;
-use App\Http\Middleware\EnsureEmailIsVerified;
-use App\Http\Middleware\Guest;
-use App\Http\Middleware\Owner;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(

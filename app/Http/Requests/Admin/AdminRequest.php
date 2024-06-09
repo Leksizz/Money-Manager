@@ -1,12 +1,10 @@
 <?php
 
-namespace App\Http\Requests\User;
+namespace App\Http\Requests\Admin;
 
-use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class UpdateRequest extends FormRequest
+class AdminRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,8 +24,7 @@ class UpdateRequest extends FormRequest
         return [
             'name' => 'string|max:255',
             'lastname' => 'string|max:255',
-            'email' => 'email|unique:users,email,' . $this->user()->id,
-            'currency_id' => 'int',
+            'email' => 'email|unique:users,email,' . $this->user->id,
         ];
     }
 }

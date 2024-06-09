@@ -1,9 +1,12 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\FinanceController;
+use App\Http\Controllers\NewsController;
 use App\Http\Controllers\ResetPasswordController;
+use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
@@ -31,7 +34,7 @@ Route::middleware(Authenticate::class)->group(function () {
 });
 
 Route::get('/email/verify/{id}/{hash}', [VerifyEmailController::class, 'create'])
-    ->middleware([Authenticate::class, EnsureEmailIsVerified::class])
+    ->middleware([Authenticate::class])
     ->name('verification.verify');
 
 Route::middleware(Guest::class)->group(function () {
@@ -66,15 +69,27 @@ Route::middleware(Authenticate::class)->group(function () {
 });
 
 Route::middleware(Guest::class)->group(function () {
-Route::prefix('auth')->group(function () {
-    Route::get('/register', [AuthController::class, 'create'])->name('auth.create');
-    Route::get('/login', [AuthController::class, 'index'])->name('login');
-    Route::post('/store', [AuthController::class, 'store'])->name('auth.store');
-    Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
-});
+    Route::prefix('auth')->group(function () {
+        Route::get('/register', [AuthController::class, 'create'])->name('auth.create');
+        Route::get('/login', [AuthController::class, 'index'])->name('login');
+        Route::post('/store', [AuthController::class, 'store'])->name('auth.store');
+        Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
+    });
 });
 
 Route::post('/auth/logout', [AuthController::class, 'destroy'])
     ->middleware(Authenticate::class)
     ->name('auth.destroy');
 
+Route::prefix('admin')->group(function () {
+    Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.index');
+    Route::get('/users', [AdminController::class, 'users'])->name('admin.users');
+    Route::get('/edit/{user}', [AdminController::class, 'edit'])->name('admin.edit');
+    Route::patch('/update/{user}', [AdminController::class, 'update'])->name('admin.update');
+    Route::delete('/destroy/{user}', [AdminController::class, 'destroy'])->name('admin.destroy');
+    Route::get('/news', [AdminController::class, 'news'])->name('admin.news');
+    Route::get('/tags', [AdminController::class, 'tags'])->name('admin.tags');
+});
+
+Route::resource('news', NewsController::class);
+Route::resource('tags', TagController::class);

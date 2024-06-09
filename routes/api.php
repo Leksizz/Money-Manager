@@ -4,8 +4,6 @@ use App\Http\Controllers\Api\FinanceController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\Owner;
 
-// Route::apiResource('users', UserController::class);
-
 Route::middleware(Owner::class)->group(function () {
     Route::prefix('{type}')->group(function () {
         Route::get('/today/{balance}', [FinanceController::class, 'today'])->name('finance.today');
