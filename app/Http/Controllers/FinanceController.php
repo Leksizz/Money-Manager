@@ -6,7 +6,9 @@ use App\DTO\Balance\FinanceDTO;
 use App\Http\Requests\Balance\FinanceRequest;
 use App\Models\Balance;
 use App\Services\BalanceService;
+use Exception;
 use Illuminate\View\View;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class FinanceController extends Controller
 {
@@ -24,7 +26,10 @@ class FinanceController extends Controller
         return view("balance.$type", compact('type', 'balance'));
     }
 
-    public function store(string $type, Balance $balance, FinanceRequest $request)
+    /**
+     * @throws Exception
+     */
+    public function store(string $type, Balance $balance, FinanceRequest $request): RedirectResponse
     {
         $validatedData = $request->validated();
         $DTO = FinanceDTO::from($validatedData);

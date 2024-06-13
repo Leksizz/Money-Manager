@@ -2,9 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>@yield('title')</title>
     @vite('resources/js/app.js')
     <script src="https://kit.fontawesome.com/47ae1cb85a.js" crossorigin="anonymous"></script>
+    <link rel="icon" href="{{ asset('favicon-32x32.png') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/layouts/main/style.css') }}">
 </head>
 <body>
@@ -19,11 +20,11 @@
             </li>
             <li>
                 <a href="{{ route('finance.show', ['type' => 'income', 'balance' => auth()->id()]) }}"><i
-                        class="fa fa-coins"></i>Доходы</a>
+                            class="fa fa-coins"></i>Доходы</a>
             </li>
             <li>
                 <a href="{{ route('finance.show', ['type' => 'expense', 'balance' => auth()->id()]) }}"><i
-                        class="fa fa-store"></i>Расходы</a>
+                            class="fa fa-store"></i>Расходы</a>
             </li>
             <li>
                 <a href="{{ route('news.index') }}"><i class="fa fa-newspaper"></i>Новости</a>
@@ -31,11 +32,11 @@
             <li>
                 <a href="{{ route('users.edit', auth()->id()) }}"><i class="fa fa-gear"></i>Настройки</a>
             </li>
-{{--            @can('view', auth()->user())--}}
+            @can('viewAny', auth()->user())
                 <li>
                     <a href="{{ route('admin.index') }}"><i class="fa fa-screwdriver-wrench"></i>Админ</a>
                 </li>
-{{--            @endcan--}}
+            @endcan
         </ul>
     </aside>
 

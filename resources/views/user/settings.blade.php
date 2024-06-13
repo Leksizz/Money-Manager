@@ -35,7 +35,7 @@
             </div>
             <div class="mb-3">
                 <select name="currency_id">
-                    <option value="{{ auth()->user()->currency_id }}" selected>Не выбрано</option>
+                    <option value="{{ auth()->user()->balance->currency_id }}" selected>Не выбрано</option>
                     <option value="1">Американский доллар (USD)</option>
                     <option value="2">Евро (EUR)</option>
                     <option value="3">Российский рубль (RUB)</option>
