@@ -57,6 +57,8 @@ function matchValues(finance) {
         ];
     }
 
+    console.log(values);
+
     for (let i = 0; i < finance.length; i++) {
         const matchingIndex = values.findIndex(value => value.name === finance[i].category.name);
         if (matchingIndex !== -1) {

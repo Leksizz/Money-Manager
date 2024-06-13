@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class Owner
+class Admin
 {
     /**
      * Handle an incoming request.
@@ -16,14 +16,8 @@ class Owner
 
     public function handle(Request $request, Closure $next): Response
     {
-        if ($request->route('balance')) {
-            if ($request->route('balance')->id != auth()->id()) {
-                return redirect()->route('balance.show', auth()->id());
-            }
-        } else {
-            if ($request->route('user')->id != auth()->id()) {
-                return redirect()->route('balance.show', auth()->id());
-            }
+        if (auth()->user()->role->name !== 'admin') {
+            return redirect()->route('balance.show', auth()->id());
         }
         return $next($request);
     }

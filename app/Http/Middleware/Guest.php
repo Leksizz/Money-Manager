@@ -14,6 +14,7 @@ class Guest
      *
      * @param \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response) $next
      */
+
     public function handle(Request $request, Closure $next): Response
     {
         if (Auth::check()) {

@@ -13,12 +13,11 @@ Route::middleware(Owner::class)->group(function () {
         Route::get('/all/{balance}', [FinanceController::class, 'all'])->name('finance.all');
         Route::post('/period/{balance}', [FinanceController::class, 'period'])->name('finance.period');
     });
+    Route::get('/statistic/{balance}', [FinanceController::class, 'statistic'])->name('finance.statistic');
 });
 
 
-Route::get('/statistic/{balance}', [FinanceController::class, 'statistic'])
-    ->name('finance.statistic')
-    ->middleware(Owner::class);
+
 
 
 

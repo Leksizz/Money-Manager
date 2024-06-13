@@ -6,6 +6,7 @@ use App\Http\Requests\News\NewsRequest;
 use App\Models\News;
 use App\Services\AdminService;
 use App\Services\NewsService;
+
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
@@ -19,9 +20,6 @@ class NewsController extends Controller
         $this->newsService = $newsService;
     }
 
-    /**
-     * Display a listing of the resource.
-     */
     public function index(): View
     {
         $posts = AdminService::getNewsPaginate(5);
@@ -29,9 +27,6 @@ class NewsController extends Controller
         return view('news.index', compact('posts'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create(): View
     {
         $tags = NewsService::getTags();
@@ -39,9 +34,6 @@ class NewsController extends Controller
         return view('news.create', compact('tags'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(NewsRequest $request): RedirectResponse
     {
         $validatedData = $request->validated();
@@ -54,17 +46,11 @@ class NewsController extends Controller
         return redirect()->back()->with('status', 'Публикация успешно добавлена!');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(News $news): View
     {
         return view('news.show', compact('news'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(News $news): View
     {
         $tags = NewsService::getTags();
@@ -72,9 +58,6 @@ class NewsController extends Controller
         return view('news.edit', compact('news', 'tags'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(NewsRequest $request, News $news): RedirectResponse
     {
         $validatedData = $request->validated();
@@ -87,9 +70,6 @@ class NewsController extends Controller
         return redirect()->back()->with('status', 'Публикация успешно отредактирована!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(News $news): RedirectResponse
     {
         $this->newsService->deleteNews($news);

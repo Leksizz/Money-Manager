@@ -5,7 +5,6 @@ namespace App\Services;
 use App\Models\News;
 use App\Models\Tag;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Facades\Storage;
 
 class NewsService
 {
@@ -16,7 +15,7 @@ class NewsService
 
     public static function storeNews(mixed $data, mixed $tagIds): void
     {
-        $news = News::firstOrCreate($data)->tags()->attach($tagIds);
+        News::firstOrCreate($data)->tags()->attach($tagIds);
     }
 
     public static function getTags(): Collection

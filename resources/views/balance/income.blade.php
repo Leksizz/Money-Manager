@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', 'Доходы')
 @section('content')
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
     <link rel="stylesheet" href="{{ asset('assets/css/dashboard/dashboard.css') }}">

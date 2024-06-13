@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', 'Настройки')
 @section('content')
     <div class="container mt-5">
         <h2 class="mb-4 text-center">Настройки</h2>

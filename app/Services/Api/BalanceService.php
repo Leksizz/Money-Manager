@@ -6,13 +6,12 @@ use App\DTO\Date\DateDTO;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use voku\helper\ASCII;
 
 class BalanceService
 {
     public function today(HasMany $type): Collection
     {
-        return $type->with('category')->whereDate('updated_at', Carbon::today())->get();
+        return $type->with('category')->whereDate('created_at', Carbon::today())->get();
     }
 
     public function week(HasMany $type): Collection
@@ -54,6 +53,6 @@ class BalanceService
 
     private function getPeriod(HasMany $type, string $start, string $end): Collection
     {
-        return $type->with('category')->whereBetween('updated_at', [$start, $end])->get();
+        return $type->with('category')->whereBetween('created_at', [$start, $end])->get();
     }
 }
