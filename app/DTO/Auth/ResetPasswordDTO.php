@@ -10,5 +10,7 @@ class ResetPasswordDTO extends Data
 
     public string $password;
 
+    public string $passwordConfirmation;
+
     public string $token;
 }

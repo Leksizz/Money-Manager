@@ -1,5 +1,4 @@
 @extends('layouts.app')
-@section('title', 'Данные за период')
 @section('content')
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
     <script src="{{ asset('assets/js/jquery/jquery.js') }}"></script>

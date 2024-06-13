@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\DTO\Auth\ForgotPasswordDTO;
 use App\Http\Requests\Auth\ForgotPasswordRequest;
 use App\Services\ForgotPasswordService;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
-use Illuminate\View\View;
 
 class ForgotPasswordController extends Controller
 {
@@ -18,7 +18,7 @@ class ForgotPasswordController extends Controller
         $this->forgotPasswordService = $forgotPasswordService;
     }
 
-    public function create(): View
+    public function create()
     {
         return view('auth.forgotPassword');
     }

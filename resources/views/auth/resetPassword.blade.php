@@ -1,5 +1,3 @@
-<title>Сброс пароля</title>
-<link rel="icon" href="{{ asset('favicon-32x32.png') }}">
 @vite('resources/js/app.js')
 <section class="py-3 py-md-5">
     <div class="container">

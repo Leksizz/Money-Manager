@@ -11,7 +11,6 @@ use App\Models\Balance;
 use App\Services\Api\BalanceService;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
-use InvalidArgumentException;
 
 class FinanceController
 {
@@ -79,7 +78,7 @@ class FinanceController
         return match ($type) {
             'income' => IncomeResource::collection($finance),
             'expense' => ExpenseResource::collection($finance),
-            default => throw new InvalidArgumentException("Invalid type: $type"),
+            default => throw new \InvalidArgumentException("Invalid type: $type"),
         };
     }
 }

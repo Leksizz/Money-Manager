@@ -14,9 +14,5 @@ p {
 }
 
 .date {
-    color: grey;
-}
-
-.content {
-    word-wrap: break-word;
+    color:grey;
 }

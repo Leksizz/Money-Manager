@@ -57,7 +57,6 @@ class AdminController extends Controller
 
     public function news(): View
     {
-
         $posts = AdminService::getNewsPaginate(10);
 
         return view('admin.news', compact('posts'));

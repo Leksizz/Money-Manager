@@ -22,19 +22,25 @@ class AuthController extends Controller
         $this->authService = $authService;
     }
 
-
+    /**
+     * Display a listing of the resource.
+     */
     public function index(): View
     {
         return view('auth.login');
     }
 
-
+    /**
+     * Show the form for creating a new resource.
+     */
     public function create(): View
     {
         return view('auth.register');
     }
 
-
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(RegisterRequest $request): RedirectResponse
     {
         $validatedData = $request->validated();
@@ -45,6 +51,9 @@ class AuthController extends Controller
         return redirect()->route('verification.notice');
     }
 
+    /**
+     * Display the specified resource.
+     */
     public function login(LoginRequest $request): RedirectResponse
     {
         $validatedData = $request->validated();

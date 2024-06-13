@@ -1,5 +1,4 @@
 @extends('layouts.app')
-@section('title', 'Список новостей')
     @section('content')
         <link rel="stylesheet" href="{{ asset('assets/css/admin/admin.css') }}">
         <div class="container mt-5">

@@ -29,6 +29,6 @@ class AdminService
 
     public static function getNewsPaginate(int $num)
     {
-        return News::orderBy('created_at', 'desc')->paginate($num);
+        return News::paginate($num);
     }
 }

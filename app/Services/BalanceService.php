@@ -4,9 +4,6 @@ namespace App\Services;
 
 use App\DTO\Balance\FinanceDTO;
 use App\Models\Balance;
-use Exception;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Number;
 
 class BalanceService
@@ -21,28 +18,18 @@ class BalanceService
         return $balance->currency->code;
     }
 
-    /**
-     * @throws Exception
-     */
-    public function addFinance(string $type, Balance $balance, FinanceDTO $DTO): void
+    public function addFinance(string $type, Balance $balance, FinanceDTO $DTO)
     {
-        try {
-            DB::transaction(function () use ($type, $balance, $DTO) {
-                $balance->$type()->create([
-                    'amount' => $DTO->amount,
-                    'category_id' => $DTO->category_id,
-                    'balance_id' => $balance->id,
-                ]);
+        $balance->$type()->create([
+            'amount' => $DTO->amount,
+            'category_id' => $DTO->category_id,
+            'balance_id' => $balance->id,
+        ]);
 
-                self::updateBalance($type, $balance, $DTO);
-            });
-        } catch (Exception $e) {
-            Log::error('Error add finance: ', ['exception' => $e]);
-            throw $e;
-        }
+        self::updateBalance($type, $balance, $DTO);
     }
 
-    private static function updateBalance(string $type, Balance $balance, FinanceDTO $DTO): void
+    private static function updateBalance(string $type, Balance $balance, FinanceDTO $DTO)
     {
         match ($type) {
             'income' => $balance->increment('amount', $DTO->amount),

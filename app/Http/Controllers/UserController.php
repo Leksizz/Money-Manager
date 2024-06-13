@@ -6,7 +6,7 @@ use App\DTO\User\UpdateDTO;
 use App\Http\Requests\User\UpdateRequest;
 use App\Models\User;
 use App\Services\UserService;
-use Exception;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
@@ -25,9 +25,6 @@ class UserController extends Controller
         return view('user.settings', compact('user'));
     }
 
-    /**
-     * @throws Exception
-     */
     public function update(UpdateRequest $request, User $user): RedirectResponse
     {
         $validatedData = $request->validated();

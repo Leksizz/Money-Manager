@@ -1,7 +1,7 @@
 @extends('layouts.app')
-@section('title', 'Разделы')
 @section('content')
     <div class="container mt-5">
+
         <div class="card mb-3">
             <div class="card-body">
                 <h5 class="card-title">Пользователи</h5>
@@ -25,5 +25,6 @@
                 <a href="{{ route('admin.tags') }}" class="btn btn-warning">Перейти</a>
             </div>
         </div>
+
     </div>
 @endsection

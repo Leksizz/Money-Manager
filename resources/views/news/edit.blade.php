@@ -1,5 +1,4 @@
 @extends('layouts.app')
-@section('title', 'Редактирование публикации')
 @section('content')
     <div class="container mt-5">
         @if(session('status'))

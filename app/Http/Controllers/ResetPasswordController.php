@@ -5,10 +5,8 @@ namespace App\Http\Controllers;
 use App\DTO\Auth\ResetPasswordDTO;
 use App\Http\Requests\Auth\ResetPasswordRequest;
 use App\Services\ResetPasswordService;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
-use Illuminate\View\View;
 
 class ResetPasswordController extends Controller
 {
@@ -20,12 +18,12 @@ class ResetPasswordController extends Controller
         $this->resetPasswordService = $resetPasswordService;
     }
 
-    public function create(Request $request): View
+    public function create(Request $request)
     {
         return view('auth.resetPassword', ['request' => $request]);
     }
 
-    public function store(ResetPasswordRequest $request): RedirectResponse
+    public function store(ResetPasswordRequest $request)
     {
         $validatedData = $request->validated();
         $DTO = ResetPasswordDTO::from($validatedData);
