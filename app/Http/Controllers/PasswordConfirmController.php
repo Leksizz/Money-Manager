@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Services\PasswordConfirmService;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
 class PasswordConfirmController extends Controller
 {
@@ -16,12 +18,12 @@ class PasswordConfirmController extends Controller
         $this->passwordConfirmService = $passwordConfirmService;
     }
 
-    public function show()
+    public function show(): View
     {
         return view('user.confirmPassword');
     }
 
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         if ($this->passwordConfirmService->isConfirmedPassword($request)) {
             $request->session()->passwordConfirmed();

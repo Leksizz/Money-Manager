@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
 class VerifyEmailController extends Controller
 {
@@ -18,7 +19,7 @@ class VerifyEmailController extends Controller
         $this->verifyEmailService = $verifyEmailService;
     }
 
-    public function index()
+    public function index(): View
     {
         return view('auth.verifyEmail');
     }

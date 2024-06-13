@@ -3,12 +3,10 @@
 namespace App\Services;
 
 use App\DTO\User\UpdateDTO;
-use App\Models\Balance;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Number;
 
 class UserService
 {
